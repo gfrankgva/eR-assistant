@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>eR Assistant - Bookmarklet Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    
+    h1 {
+      color: #6B2642;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    .test-btn {
+      background: linear-gradient(135deg, #6B2642 0%, #4A1A2F 100%);
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(107, 38, 66, 0.3);
+      transition: transform 0.2s;
+    }
+    
+    .test-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(107, 38, 66, 0.4);
+    }
+    
+    .code-block {
+      background: #f8f8f8;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: #333;
+      overflow-x: auto;
+      margin-top: 20px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .step {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .step:last-child {
+      border-bottom: none;
+    }
+    
+    .step-number {
+      display: inline-block;
+      background: #6B2642;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    
+    .success {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      padding: 12px;
+      border-radius: 8px;
+      color: #166534;
+      margin-top: 20px;
+    }
+    
+    .warning {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      padding: 12px;
+      border-radius: 8px;
+      color: #92400e;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>eR Assistant v1.3</h1>
+  <p class="subtitle">Test the bookmarklet before GitHub setup</p>
+  
+  <button class="test-btn" onclick="loadWidget()">Test Widget</button>
+  
+  <div class="success" style="display:none" id="success-msg">
+    ✅ Widget loaded! Look for the "eR assistant" button on the right side of the screen.
+  </div>
+</div>
+
+<div class="card">
+  <h2>Testing Steps</h2>
+  
+  <div class="step">
+    <span class="step-number">1</span>
+    <strong>Click "Test Widget" above</strong>
+    <p style="margin-top:10px">The widget should slide in from the right side</p>
+  </div>
+  
+  <div class="step">
+    <span class="step-number">2</span>
+    <strong>Upload a service JSON file</strong>
+    <p style="margin-top:10px">Click or drag a BPA service export file</p>
+  </div>
+  
+  <div class="step">
+    <span class="step-number">3</span>
+    <strong>Check the overview</strong>
+    <p style="margin-top:10px">Verify BOT counts and health indicators</p>
+  </div>
+  
+  <div class="step">
+    <span class="step-number">4</span>
+    <strong>Run full analysis</strong>
+    <p style="margin-top:10px">Click "Run Full Analysis" button</p>
+  </div>
+  
+  <div class="step">
+    <span class="step-number">5</span>
+    <strong>Test BPA links</strong>
+    <p style="margin-top:10px">Click "Search in BPA →" (opens in new tab)</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Next Steps</h2>
+  
+  <p>If the test works:</p>
+  <ol>
+    <li>Follow the SETUP-GUIDE.md to deploy to GitHub Pages</li>
+    <li>Create the bookmarklet with your GitHub username</li>
+    <li>Use it on any BPA page</li>
+  </ol>
+  
+  <div class="warning">
+    <strong>Note:</strong> This test page loads the script locally. The real bookmarklet will load from GitHub Pages.
+  </div>
+</div>
+
+<div class="card">
+  <h2>Bookmarklet Preview</h2>
+  
+  <p>After GitHub setup, your bookmarklet will look like this:</p>
+  
+  <div class="code-block">
+javascript:(function(){if(document.getElementById('er-widget')){var w=document.getElementById('er-widget');var t=document.getElementById('toggle-btn');w.classList.toggle('open');t.classList.toggle('widget-open');}else{var s=document.createElement('script');s.src='https://YOUR-USERNAME.github.io/er-assistant/er-assistant.js';document.head.appendChild(s);}})();
+  </div>
+  
+  <p style="margin-top:10px"><strong>Remember:</strong> Replace YOUR-USERNAME with your actual GitHub username</p>
+</div>
+
+<script src="er-assistant.js"></script>
+<script>
+function loadWidget() {
+  // The widget should auto-load from the included script
+  // This button just shows the success message
+  document.getElementById('success-msg').style.display = 'block';
+  
+  // Auto-open after a moment
+  setTimeout(() => {
+    if (window.toggleWidget) {
+      window.toggleWidget();
+    }
+  }, 500);
+}
+</script>
+
+</body>
+</html>
