@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eR-Assistant Phase 1 - Installation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+    
+    h1 { margin-bottom: 0.5rem; color: #1a1a1a; }
+    .subtitle { color: #666; margin-bottom: 2rem; font-size: 0.95rem; }
+    
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .card h2 { font-size: 1.25rem; margin-bottom: 1rem; color: #1a1a1a; }
+    
+    .bookmarklet-box {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+    }
+    
+    .code-block {
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 1rem;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      margin: 0.5rem 0;
+    }
+    
+    .code-inline {
+      background: #f0f0f0;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+    }
+    button:hover { background: #0056b3; }
+    
+    ol { margin-left: 1.5rem; margin-top: 0.5rem; }
+    li { margin-bottom: 0.5rem; }
+    
+    .step-title { font-weight: 600; margin-top: 1rem; }
+    
+    .alert-success {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+    }
+    
+    .alert-info {
+      background: #d1ecf1;
+      border: 1px solid #bee5eb;
+      color: #0c5460;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+    }
+    
+    .footer { color: #666; font-size: 0.9rem; margin-top: 2rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>eR-Assistant Phase 1</h1>
+    <p class="subtitle">Core Connection Layer – Detect service, fetch backend data</p>
+    
+    <!-- Installation -->
+    <div class="card">
+      <h2>📌 Installation (1 min)</h2>
+      <p>Add this bookmarklet to your browser:</p>
+      
+      <div class="bookmarklet-box">
+        <p><strong>Step 1:</strong> Copy this code</p>
+        <div class="code-block" id="bookmarklet">javascript:(function(){if(window.erAssistantLoaded)return;var s=document.createElement('script');s.src='https://gfrankgva.github.io/eR-assistant/main.js';document.body.appendChild(s);})();</div>
+        <button onclick="copyCode('bookmarklet')">📋 Copy to Clipboard</button>
+      </div>
+      
+      <p style="margin-top: 1rem;"><strong>Step 2:</strong> Create bookmark</p>
+      <ol>
+        <li>Right-click bookmarks bar → <span class="code-inline">Add page</span></li>
+        <li>Name: <span class="code-inline">eR-Assistant</span></li>
+        <li>URL: Paste the code above</li>
+        <li>Save</li>
+      </ol>
+    </div>
+    
+    <!-- Testing -->
+    <div class="card">
+      <h2>✅ Testing (2 min)</h2>
+      <ol>
+        <li><strong>Open BPA Cuba:</strong> <span class="code-inline">https://bpa.cuba.eregistrations.org/</span></li>
+        <li><strong>Log in</strong> if needed</li>
+        <li><strong>Navigate to a Service</strong> – click "Edit service" on any service</li>
+        <li><strong>Click bookmarklet</strong> in your bookmarks bar</li>
+        <li><strong>Open DevTools:</strong> Press <span class="code-inline">F12</span> or right-click → Inspect → Console tab</li>
+        <li><strong>Check console output</strong> – should see entity counts</li>
+      </ol>
+      
+      <div class="alert-success">
+        <strong>✓ Success looks like:</strong><br>
+        <div class="code-block">
+=== eR-Assistant Phase 1 ===
+✓ Service ID: 8393ad98-a16d-4a2d-80d0-23fbbd69b9e7
+Fetching backend data...
+
+📊 Entity Counts:
+  Forms:        5
+  Roles:        3
+  Determinants: 25
+  BOTs:         2
+
+✓ Phase 1 Complete. Ready for Phase 2.
+        </div>
+      </div>
+    </div>
+    
+    <!-- Troubleshooting -->
+    <div class="card">
+      <h2>🔧 Troubleshooting</h2>
+      
+      <p class="step-title">❌ "JWT token not found"</p>
+      <p>You're not logged in to BPA Cuba. Log in first.</p>
+      
+      <p class="step-title">❌ "Not on a BPA service page"</p>
+      <p>Navigate to a service edit page. URL should contain <span class="code-inline">/services/{serviceId}/</span></p>
+      
+      <p class="step-title">❌ "HTTP 403"</p>
+      <p>Session expired. Log out and log back in to BPA Cuba.</p>
+      
+      <p class="step-title">❌ Nothing happens</p>
+      <p>Check DevTools Console for errors. Screenshot and send to Frank.</p>
+    </div>
+    
+    <!-- Next Steps -->
+    <div class="card">
+      <h2>📋 Phase 1 Checklist</h2>
+      <ul>
+        <li>☐ Bookmarklet installed</li>
+        <li>☐ Run on Cuba service page</li>
+        <li>☐ Console shows entity counts (should match manual count in BPA)</li>
+        <li>☐ Verify: Forms, Roles, Determinants, BOTs all have correct counts</li>
+        <li>☐ Screenshot console output</li>
+        <li>☐ Send results to Frank</li>
+      </ul>
+      
+      <div class="alert-info" style="margin-top: 1rem;">
+        <strong>ℹ Next Phase:</strong> Phase 2 will read the DOM to extract visible field keys and component details, then merge with backend data.
+      </div>
+    </div>
+    
+    <!-- Reference -->
+    <div class="card">
+      <h2>📚 Reference</h2>
+      <p><strong>GitHub:</strong> <a href="https://github.com/gfrankgva/eR-assistant">gfrankgva/eR-assistant</a></p>
+      <p><strong>Files:</strong></p>
+      <ul>
+        <li><span class="code-inline">main.js</span> – Phase 1 logic</li>
+        <li><span class="code-inline">index.html</span> – This page</li>
+      </ul>
+    </div>
+    
+    <div class="footer">
+      <p>eR-Assistant Phase 1 – Ready to test on Cuba instance</p>
+    </div>
+  </div>
+
+  <script>
+    function copyCode(elementId) {
+      const text = document.getElementById(elementId).textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✓ Copied to clipboard!');
+      }).catch(() => {
+        alert('Copy failed. Try manual selection.');
+      });
+    }
+  </script>
+</body>
+</html>
